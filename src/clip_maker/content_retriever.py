@@ -1,7 +1,7 @@
 from concurrent.futures import ThreadPoolExecutor
 import praw
 import random
-from config import settings
+from shared.config import settings
 
 
 def initialize_wrapper():
