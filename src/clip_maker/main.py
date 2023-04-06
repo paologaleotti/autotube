@@ -15,8 +15,6 @@ def log_finished_clips(videos):
 
 
 def core():
-    start_time = time.time()
-
     limit = settings.content.clips_limit
     max_duration = settings.content.max_clip_duration
 
@@ -25,11 +23,13 @@ def core():
     with multiprocessing.Pool() as pool:
         pool.map(generate_clip, videos)
 
-    elapsed_time = time.time() - start_time
-
     log_finished_clips(videos)
-    print(f"[CLIPMAKER] DONE in {elapsed_time:.2f} seconds.")
 
 
 if __name__ == '__main__':
+    start_time = time.time()
+
     core()
+
+    elapsed_time = time.time() - start_time
+    print(f"[CLIPMAKER] DONE in {elapsed_time:.2f} seconds.")

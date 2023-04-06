@@ -13,3 +13,9 @@ reddit:
 content:
   clips_limit: 10
   max_clip_duration: 30
+
+out_video:
+  width: 1920
+  height: 1080
+  fps: 24
+  bg_color: [0, 0, 0]
