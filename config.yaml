@@ -5,11 +5,10 @@ reddit:
     user_agent: Chrome
 
   subreddits:
-    - memes
-    - videomemes
-    - memevideos
-    - dankmemes
+    - TikTok
+    - TikTokmemes
+    - TikTokCringe
 
 content:
   clips_limit: 10
-  max_clip_duration: 60
+  max_clip_duration: 30

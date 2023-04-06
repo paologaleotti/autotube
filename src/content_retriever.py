@@ -1,3 +1,4 @@
+from concurrent.futures import ThreadPoolExecutor
 import praw
 import random
 from config import settings
@@ -10,20 +11,36 @@ def initialize_wrapper():
     return reddit
 
 
+def retrieve_mapped_posts(reddit, pool, max_duration):
+
+    def retrieve_subreddit_posts(subreddit_name):
+        subreddit = reddit.subreddit(subreddit_name)
+        print("Getting posts from", subreddit_name)
+
+        return [post for post in subreddit.hot(limit=150)
+                if post.is_video
+                and post.media and post.media.get('reddit_video')
+                and post.media['reddit_video']['duration'] <= max_duration]
+
+    with ThreadPoolExecutor() as executor:
+        subreddit_posts = list(executor.map(retrieve_subreddit_posts, pool))
+
+    return subreddit_posts
+
+
 def retrieve_video_posts(limit: int, max_duration: int):
     reddit = initialize_wrapper()
-
     pool = settings.reddit.subreddits
-    subreddit = reddit.subreddit(random.choice(pool))
 
-    print("getting content from:", pool)
+    subreddit_mapped_posts = retrieve_mapped_posts(reddit, pool, max_duration)
 
-    posts = subreddit.hot(limit=100)
+    posts = []
+    for _ in range(limit):
+        random_sub = random.choice(subreddit_mapped_posts)
+        post = random.choice(random_sub)
+        print(f"selected post {post.id} from {post.subreddit}")
 
-    filtered_posts = [post for post in posts
-                      if post.is_video
-                      and post.media['reddit_video']['duration'] <= max_duration]
+        posts.append(post)
 
-    videos = random.sample(population=filtered_posts, k=limit)
-
+    videos = random.sample(posts, k=limit)
     return videos
