@@ -34,7 +34,8 @@ def combine_clips(clips_dir, out_dir):
         log.info("Rendering...")
 
         final_clip.write_videofile(out_file, fps=fps)
-        log.info(f"Output file: {os.path(out_file)}")
+        log.info(f"Output file: {os.path.abspath(out_file)}")
 
     except BaseException as e:
         log.critical(e)
+        raise e

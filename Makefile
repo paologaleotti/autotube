@@ -7,6 +7,7 @@ clips:
 	python3 src/clip_maker/main.py
 
 video:
+	rm -rf out
 	python3 src/clip_combiner/main.py
 
 all: clips video
