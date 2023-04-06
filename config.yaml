@@ -1,0 +1,15 @@
+reddit:
+  auth:
+    client_id: pXNcoP_IuovfZyhpyAXJOw
+    client_secret: SG8gB-BqPGwitoaZJRcp6d1CHikchQ
+    user_agent: Chrome
+
+  subreddits:
+    - memes
+    - videomemes
+    - memevideos
+    - dankmemes
+
+content:
+  clips_limit: 10
+  max_clip_duration: 60

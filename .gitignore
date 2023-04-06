@@ -1,3 +1,8 @@
+clips
+audio_*
+video_*
+out_*
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
