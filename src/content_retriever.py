@@ -19,7 +19,7 @@ def retrieve_mapped_posts(reddit, pool, max_duration):
 
         return [post for post in subreddit.hot(limit=150)
                 if post.is_video
-                and post.media and post.media.get('reddit_video')
+                and post.media.get('reddit_video')
                 and post.media['reddit_video']['duration'] <= max_duration]
 
     with ThreadPoolExecutor() as executor:

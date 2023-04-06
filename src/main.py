@@ -11,7 +11,7 @@ def core():
 
     videos = retrieve_video_posts(limit, max_duration)
 
-    with multiprocessing.Pool(processes=5) as pool:
+    with multiprocessing.Pool() as pool:
         pool.map(generate_clip, videos)
 
 
