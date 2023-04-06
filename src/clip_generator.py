@@ -17,8 +17,6 @@ def generate_clip(post):
     audio_url = video_url[:video_url.find(
         "DASH_")] + "DASH_audio.mp4?source=fallback"
 
-    # download and render video
-
     video_path = get_clip_path("video", post.id)
     audio_path = get_clip_path("audio", post.id)
     output_path = get_clip_path("out", post.id)
@@ -29,16 +27,18 @@ def generate_clip(post):
     with open(audio_path, "wb") as f:
         f.write(requests.get(audio_url).content)
 
-    # Load video and audio into moviepy's VideoFileClip and AudioFileClip
-    video = VideoFileClip(video_path)
-    audio = AudioFileClip(audio_path)
+    try:
+        # Load video and audio into moviepy's VideoFileClip and AudioFileClip
+        video = VideoFileClip(video_path)
+        audio = AudioFileClip(audio_path)
 
-    # Merge audio and video
-    merged_clip = video.set_audio(audio)
+        # Merge audio and video
+        merged_clip = video.set_audio(audio)
 
-    # Write merged clip to output file
-    merged_clip.write_videofile(output_path)
+        # Write merged clip to output file
+        merged_clip.write_videofile(output_path)
+    except BaseException as e:
+        print(e)
 
-    # Clean up downloaded files
     os.remove(video_path)
     os.remove(audio_path)
