@@ -1,9 +1,17 @@
 import multiprocessing
-from moviepy.editor import *
+import time
+
 from clip_generator import generate_clip
 from content_retriever import retrieve_video_posts
+from moviepy.editor import *
+
 from shared.config import settings
-import time
+
+
+def log_finished_clips(videos):
+    print("GENERATED CLIPS:")
+    for video in videos:
+        print(f"|ID: {video.id} |SUB: {video.subreddit}")
 
 
 def core():
@@ -18,6 +26,8 @@ def core():
         pool.map(generate_clip, videos)
 
     elapsed_time = time.time() - start_time
+
+    log_finished_clips(videos)
     print(f"[CLIPMAKER] DONE in {elapsed_time:.2f} seconds.")
 
 

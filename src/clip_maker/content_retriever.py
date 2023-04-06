@@ -1,6 +1,8 @@
-from concurrent.futures import ThreadPoolExecutor
-import praw
 import random
+from concurrent.futures import ThreadPoolExecutor
+
+import praw
+
 from shared.config import settings
 
 
