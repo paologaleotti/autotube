@@ -11,6 +11,7 @@ reddit:
     - memes
     - dankvideos
     - GoofyAhh
+  post_retrieve_limit: 250
 
 content:
   clips_limit: 10
