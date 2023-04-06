@@ -1,7 +1,7 @@
 clips
-audio_*
-video_*
-out_*
+*.mp4
+*.mp3
+*TEMP*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
