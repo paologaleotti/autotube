@@ -1,6 +1,7 @@
-import requests
 import os
-from moviepy.editor import VideoFileClip, AudioFileClip
+
+import requests
+from moviepy.editor import AudioFileClip, VideoFileClip
 
 BASE_CLIPS_PATH = "clips"
 
@@ -28,17 +29,13 @@ def generate_clip(post):
         with open(audio_path, "wb") as f:
             f.write(requests.get(audio_url).content)
 
-        # Load video and audio into moviepy's VideoFileClip and AudioFileClip
         video = VideoFileClip(video_path)
         audio = AudioFileClip(audio_path)
 
-        # Merge audio and video
         merged_clip = video.set_audio(audio)
-
-        # Write merged clip to output file
         merged_clip.write_videofile(output_path)
+
+        os.remove(video_path)
+        os.remove(audio_path)
     except BaseException as e:
         print(e)
-
-    os.remove(video_path)
-    os.remove(audio_path)
