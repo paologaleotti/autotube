@@ -18,3 +18,5 @@ jobs:
           pip install -r requirements.txt
       - name: Generate clips
         run: make clips
+      - name: Render final video
+        run: make video
