@@ -3,6 +3,8 @@ import os
 import requests
 from moviepy.editor import AudioFileClip, VideoFileClip
 
+from shared.logger import log
+
 BASE_CLIPS_PATH = "clips"
 
 
@@ -13,7 +15,7 @@ def get_clip_path(prefix, post_id):
 
 def generate_clip(post):
     try:
-        print("generating video for", post.id)
+        log.info(f"Generating video for post {post.id}...")
 
         video_url = post.media["reddit_video"]["fallback_url"]
         audio_url = video_url[:video_url.find(
@@ -33,9 +35,9 @@ def generate_clip(post):
         audio = AudioFileClip(audio_path)
 
         merged_clip = video.set_audio(audio)
-        merged_clip.write_videofile(output_path)
+        merged_clip.write_videofile(output_path, verbose=False, logger=None)
 
         os.remove(video_path)
         os.remove(audio_path)
     except BaseException as e:
-        print(e)
+        log.error(e)

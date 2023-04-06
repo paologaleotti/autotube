@@ -7,8 +7,10 @@ reddit:
   subreddits:
     - TikTok
     - TikTokmemes
-    - TikTokCringe
     - MemeVideos
+    - memes
+    - dankvideos
+    - GoofyAhh
 
 content:
   clips_limit: 10

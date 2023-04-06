@@ -6,12 +6,13 @@ from content_retriever import retrieve_video_posts
 from moviepy.editor import *
 
 from shared.config import settings
+from shared.logger import log
 
 
 def log_finished_clips(videos):
-    print("GENERATED CLIPS:")
+    log.info("GENERATED CLIPS:")
     for video in videos:
-        print(f"|ID: {video.id} |SUB: {video.subreddit}")
+        log.info(f"| ID: {video.id} | SUB: {video.subreddit}")
 
 
 def core():
@@ -28,8 +29,9 @@ def core():
 
 if __name__ == '__main__':
     start_time = time.time()
+    log.info(f"[CLIPMAKER] STARTED process")
 
     core()
 
     elapsed_time = time.time() - start_time
-    print(f"[CLIPMAKER] DONE in {elapsed_time:.2f} seconds.")
+    log.info(f"[CLIPMAKER] DONE in {elapsed_time:.2f} seconds.")
