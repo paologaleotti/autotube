@@ -11,5 +11,3 @@ settings = Dynaconf(
     envvar_prefix="APP",
     settings_files=[config_file_path],
 )
-
-log.info(f"Loaded config file: {config_file_path}")
